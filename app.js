@@ -6,7 +6,6 @@ var path = require('path');
 // var baseName = path.basename('/Repos/Personal/NodeFolderWatch/app.js');
 var folderToWatch = path.parse('/Repos/Personal/FolderToWatch/');
 
-
 var watcher = chokidar.watch(path.join(folderToWatch.dir, 'FolderToWatch/'), {
     ignored: /(^|[\/\\])\../,
     persistent: true
@@ -14,14 +13,11 @@ var watcher = chokidar.watch(path.join(folderToWatch.dir, 'FolderToWatch/'), {
 
 var log = console.log.bind(console);
 
-watcher
-  .on('add', path => log(`File ${path} has been added`))
+watcher.on('add', path => log(`File ${path} has been added`))
   .on('change', path => log(`File ${path} has been changed`))
   .on('unlink', path => log(`File ${path} has been removed`));
 
-// More possible events.
-watcher
-  .on('addDir', path => log(`Directory ${path} has been added`))
+watcher.on('addDir', path => log(`Directory ${path} has been added`))
   .on('unlinkDir', path => log(`Directory ${path} has been removed`))
   .on('error', error => log(`Watcher error: ${error}`))
   .on('ready', () => log('Initial scan complete. Ready for changes'))
